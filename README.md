@@ -1,4 +1,4 @@
-# prompt-builder
+﻿# prompt-builder
 
 本地跑的图片反推台：丢一张图进去，吐一条可直接用的正向提示词。两种写法各走一套 —— **Anima** 出 danbooru tag 串，**Krea2 / Qwen** 出「元信息 tag 行 + 一段英文散文」。
 
@@ -6,7 +6,7 @@
 
 ## 下载即用
 
-1. 到 **Releases** 下载 `Anima反推台_v1.0.zip` —— 里面带 `Anima启动器.exe`，解压即用
+1. 到 **Releases** 下载 `Anima-Reverse-Bench_v1.0.zip` —— 里面带 `Anima启动器.exe`，解压即用
 2. 双击 `Anima启动器.exe` → 点 **开始**
 3. 浏览器自动开工作台，在「设置」里加模型商连接（key 只存在你本机浏览器）
 
