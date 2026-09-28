@@ -6,11 +6,11 @@
 
 ## 下载即用
 
-1. 拿整个仓库（或 `Code → Download ZIP`）
+1. 到 **Releases** 下载 `Anima反推台_v1.0.zip` —— 里面带 `Anima启动器.exe`，解压即用
 2. 双击 `Anima启动器.exe` → 点 **开始**
 3. 浏览器自动开工作台，在「设置」里加模型商连接（key 只存在你本机浏览器）
 
-不想用 exe 也行：装好 Python 3.10+ 后双击 `start.bat`，或直接 `python server.py`。
+也可以直接克隆这个仓库：装好 Python 3.10+，双击 `start.bat`，或 `python server.py`（`Anima启动器.exe` 不随仓库走，它 11 MB，走 Release 发）。
 
 ---
 
