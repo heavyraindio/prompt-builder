@@ -1,0 +1,15 @@
+﻿# 运行时生成的，别进仓库
+providers.json
+comfy_out/
+dan_cache/
+_selftest.txt
+*.log
+
+# 打包中间产物
+_build/
+__pycache__/
+*.pyc
+dist/
+
+# 11MB 的 exe：走 Release / 网盘发布，不进 git（本地代理推不动这么大的包）
+Anima启动器.exe

@@ -1,0 +1,16 @@
+{
+  "_说明": "本文件存模型商连接与界面设置。连接不用手写，起服务后在网页「设置」里加。key 不在这个文件里，只存你本机浏览器。",
+  "port": 8899,
+  "comfy_base": "http://127.0.0.1:8188",
+  "providers": [],
+  "danbooru": {
+    "base": "https://danbooru.donmai.us",
+    "proxy": "",
+    "login": "",
+    "api_key": ""
+  },
+  "ui": {
+    "bg_opacity": 16,
+    "bg_image": "assets/bg.jpg"
+  }
+}

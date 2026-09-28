@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anima 反推台 · 工具箱</title>
+<link rel="icon" href="assets/icon.png">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/portal.css">
+</head>
+<body>
+<div class="portal">
+
+  <header>
+    <div class="brand"><span class="dot"></span>ANIMA<span class="sl">/</span>BENCH</div>
+    <div class="themebtn" id="themeBtn">
+      <button data-t="night" title="夜晚模式" aria-label="夜晚模式">
+        <i class="ico" data-i="moon"></i>
+      </button>
+      <button data-t="day" title="白天模式" aria-label="白天模式"><i class="ico" data-i="sun"></i></button>
+    </div>
+  </header>
+
+  <main>
+    <div class="kicker">Local Toolkit</div>
+    <h1>选一个<em>模式</em>开工</h1>
+    <div class="sub">全部跑在本机，图片和提示词不出这台机器。<br>两套反推写法：Anima 走 tag，Krea2 / Qwen 走散文。</div>
+
+    <div class="entries">
+      <a class="entry" href="reverse.html">
+        <span class="idx">01</span>
+        <span class="body">
+          <span class="name">Anima 反推</span>
+          <span class="desc">丢图进去，按 Anima 规范反推成一条正向提示词；可选直接送给 ComfyUI 出图。支持改词、加 tag、多模型商切换。</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="entry" href="reverse.html?mode=krea2">
+        <span class="idx">02</span>
+        <span class="body">
+          <span class="name">Krea2/Qwen 反推</span>
+          <span class="desc">同一套反推机制，换成 Krea2 / Qwen 的写法：一行元信息 tag + 一整段英文散文，画面内容不拆 tag。图库、出图、连接全部照旧。</span>
+        </span>
+        <span class="arrow">→</span>
+      </a>
+
+      <button class="entry off" id="tagMode">
+        <span class="idx">03</span>
+        <span class="body">
+          <span class="name">打标模式 <span class="badge">待定</span></span>
+          <span class="desc">批量打标与数据集产出。方案还在构思，先占个位。</span>
+        </span>
+        <span class="arrow">⋯</span>
+      </button>
+    </div>
+  </main>
+
+  <footer>
+    <span>本地服务 <b>127.0.0.1:8899</b></span>
+    <span>ANIMA BENCH · v1.0</span>
+  </footer>
+</div>
+
+<script src="assets/core.js"></script>
+<script src="assets/theme.js"></script>
+<script src="assets/net.js"></script>
+<script src="assets/portal.js"></script>
+</body>
+</html>

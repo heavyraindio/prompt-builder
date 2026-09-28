@@ -1,0 +1,132 @@
+/* reverse.css — 反推台专属布局（Anima / Krea2·Qwen 两模式共用） */
+
+.app{height:100dvh;display:grid;grid-template-rows:auto auto 1fr auto}
+header{display:flex;align-items:center;justify-content:space-between;
+  padding:9px 16px;border-bottom:1px solid var(--line)}
+.brand{font-size:11px;letter-spacing:.18em;font-weight:600;display:flex;align-items:center;gap:8px}
+.dot{width:6px;height:6px;background:var(--dim);border-radius:50%}
+.back{display:flex;align-items:center;color:var(--dim);text-decoration:none;margin-right:2px;
+  padding:2px 4px;margin-left:-4px;transition:color .15s}
+.back:hover{color:var(--acc)}
+.dot.on{background:var(--acc)}
+.sl{color:var(--dim)}
+.hmeta{display:flex;align-items:center;gap:12px}
+.rounds{display:flex;gap:4px}
+.rounds i{width:14px;height:3px;background:var(--track);display:block;transition:.2s}
+.rounds i.on{background:var(--acc)}
+.rounds i.dead{background:var(--dead)}
+/* 主题切换（图标） */
+.themebtn{display:flex;border:1px solid var(--line);padding:1px}
+/* 浮层提示 */
+.toast{position:fixed;left:50%;top:64px;transform:translateX(-50%);background:var(--strongbg);
+  border:1px solid var(--line-strong);padding:7px 13px;font-size:11px;color:var(--ink);z-index:40;
+  box-shadow:0 8px 26px rgba(0,0,0,.22)}
+.msg.u .purged{width:46px;height:46px;border:1px solid var(--line);background:var(--thumb);
+  display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--faint);
+  letter-spacing:.1em;flex:0 0 auto}
+.toolbar{display:flex;align-items:center;gap:10px;padding:8px 16px;
+  border-bottom:1px solid var(--line);flex-wrap:wrap}
+.field{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--dim);letter-spacing:.08em}
+/* .field 自己有 display:flex，光靠 hidden 属性压不住（作者样式压过 UA 样式），
+   模式切换要藏的几个块都得靠这两条 */
+.field[hidden],#libSec[hidden]{display:none}
+.warn{color:var(--bad);font-size:10.5px}
+main{display:grid;grid-template-columns:264px 1fr;min-height:0}
+.rail{border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;padding:12px}
+.rhead{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.14em;
+  color:var(--dim);text-transform:uppercase;margin-bottom:10px}
+.cnt{color:var(--acc)}
+.drop{border:1px dashed var(--line-strong);padding:18px 8px;text-align:center;color:var(--dim);
+  font-size:11px;cursor:pointer;line-height:1.7}
+.drop:hover,.drop.over{border-color:var(--acc);color:var(--ink)}
+.dph span{font-size:10px;opacity:.6}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px;
+  overflow:auto;min-height:0;flex:1;align-content:start}
+.thumb{position:relative;aspect-ratio:1;background:var(--thumb);border:1px solid var(--line);overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .ph{display:none;position:absolute;inset:0;align-items:center;justify-content:center;
+  font-size:9px;color:var(--faint);letter-spacing:.1em;text-align:center;line-height:1.5}
+.thumb.gone{border-color:var(--dead-line)}
+.thumb.gone .ph{display:flex}
+.thumb .tag{position:absolute;left:0;bottom:0;background:rgba(0,0,0,.66);color:var(--acc);
+  font-size:9px;padding:1px 4px;letter-spacing:.08em}
+.rfoot{margin-top:10px;font-size:10px;color:var(--dim);line-height:1.6;
+  border-top:1px solid var(--line);padding-top:8px}
+.rfoot b{color:var(--acc)}
+.chat{overflow:auto;padding:20px 24px;min-height:0}
+.empty{margin-top:12vh;text-align:center;color:var(--dim)}
+.empty .et{font-size:15px;color:var(--ink);letter-spacing:.06em;margin-bottom:10px}
+.empty .es{font-size:11.5px;line-height:1.9}
+.msg{margin-bottom:22px;max-width:920px}
+.msg.u{display:flex;gap:10px;align-items:flex-start;justify-content:flex-end;margin-left:auto}
+.msg.u .bub{background:var(--panel);border:1px solid var(--line);padding:8px 11px;
+  color:var(--ink-soft);font-size:12px;max-width:420px}
+.msg.u img{width:46px;height:46px;object-fit:cover;border:1px solid var(--line)}
+.msg.a{border-left:2px solid var(--acc);padding-left:14px}
+.msg.a pre{font-family:ui-monospace,Consolas,monospace;font-size:12.5px;line-height:1.85;
+  white-space:pre-wrap;word-break:break-word;user-select:text;color:var(--ink-strong)}
+.acts{display:flex;gap:14px;margin-top:9px;font-size:10px;color:var(--dim);letter-spacing:.08em}
+.acts button{background:none;border:0;color:var(--dim);cursor:pointer;
+  font-size:10px;letter-spacing:.08em;padding:0;font-family:inherit}
+.acts button:hover{color:var(--acc)}
+.acts button.gen{color:var(--acc)}
+.acts button.gen.busy{color:var(--dim)}
+.genout{margin-top:12px}
+.genout img{max-width:420px;width:100%;display:block;border:1px solid var(--line);background:var(--thumb)}
+.genout .meta{font-size:10px;color:var(--dim);margin-top:5px;letter-spacing:.06em}
+.genout .meta a{color:var(--dim);text-decoration:none;border-bottom:1px solid var(--line)}
+.genout .meta a:hover{color:var(--acc)}
+.tagrow{display:flex;gap:8px;margin-top:11px;align-items:center;max-width:640px}
+.tagrow input{flex:1;background:var(--field);border:1px solid var(--line);color:var(--ink);
+  padding:7px 9px;font:inherit;font-size:11.5px;outline:none;max-width:none}
+.tagrow input:focus{border-color:var(--line-strong)}
+.tagrow button{flex:0 0 auto}
+/* 出图引擎选择器：点「生成图片」时弹出来问一句 */
+.engrow{gap:6px;flex-wrap:wrap}
+.engrow .lbl{font-size:10.5px;color:var(--dim);letter-spacing:.08em;font-family:var(--disp);margin-right:2px}
+.engrow .pick.last{border-color:var(--acc);color:var(--acc)}
+.engrow .pick.last::after{content:' · 上次';opacity:.65}
+.err{color:var(--bad);font-size:11.5px;line-height:1.8}
+.tip{font-size:10.5px;color:var(--dim);letter-spacing:.06em;margin:-8px 0 20px}
+.cursor:after{content:"▍";color:var(--acc);animation:b .9s steps(1) infinite}
+@keyframes b{50%{opacity:0}}
+footer{border-top:1px solid var(--line);padding:10px 16px;display:flex;gap:10px;align-items:flex-end}
+.pending{display:flex;gap:6px}
+.pchip{position:relative;width:44px;height:44px;border:1px solid var(--acc);flex:0 0 auto;cursor:pointer}
+.pchip img{width:100%;height:100%;object-fit:cover}
+.pchip b{position:absolute;right:-1px;top:-1px;background:var(--acc);color:#121110;font-size:9px;padding:0 3px}
+@media(max-width:860px){
+  main{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+  .rail{border-right:0;border-bottom:1px solid var(--line)}
+  .grid{grid-template-columns:repeat(5,1fr);flex:none;max-height:76px}
+  .rfoot{display:none}
+}
+
+
+/* ===== P3R 调整 ===== */
+/* 页签：斜切，选中做成立体感实心块 */
+.tabs button{transform:skewX(-10deg);font-weight:800;font-size:12px;letter-spacing:.18em;
+  border:0;padding:6px 16px;color:var(--dim);background:none}
+.tabs button:hover{color:var(--ink);background:var(--hover)}
+.tabs button.on{background:var(--acc);color:var(--acc-ink);box-shadow:3px 3px 0 rgba(0,0,0,.4)}
+[data-theme="day"] .tabs button.on{box-shadow:3px 3px 0 rgba(11,59,224,.22)}
+
+/* 轮次条：斜切小段 */
+.rounds i{transform:skewX(-24deg)}
+
+/* 助手消息：粗青色竖条 */
+.msg.a{border-left:4px solid var(--acc)}
+.msg.u .bub{border-left:3px solid var(--line-strong)}
+
+/* 操作按钮加粗 */
+.acts button{font-weight:700}
+.acts .gen{color:var(--acc);border-bottom:1px solid transparent}
+.acts .gen:hover{border-bottom-color:var(--acc)}
+
+/* 投喂区缩略图：硬边 */
+.thumb{border-color:var(--line-strong)}
+
+/* 中断键：只在出图期间存在 */
+.acts button.stop{color:var(--bad);font-weight:700}
+.acts button.stop:hover{color:var(--bad)}
+.acts button.stop:disabled{opacity:.45;cursor:default}

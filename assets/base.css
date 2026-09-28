@@ -1,0 +1,222 @@
+/* ==========================================================================
+   base.css — 变量 / reset / 通用组件
+   两种主题共用一套结构，改配色只动这里的变量。
+   ========================================================================== */
+
+:root{
+  /* 底与层 */
+  --bg:#03071A; --bg2:#061034; --panel:#0A1747; --field:#081238; --thumb:#06102E;
+  --strongbg:#0E1B55; --hover:#10205E;
+  /* 线与面 */
+  --line:#16297A; --line-strong:#2C49B8;
+  /* 字 */
+  --ink:#E8F0FF; --ink-strong:#FFFFFF; --ink-soft:#B9C8F0;
+  --dim:#7B8FCC; --faint:#46589B;
+  /* 主色：P3R 的青 */
+  --acc:#00D3FF; --acc-hover:#5CE6FF; --acc-ink:#04122E;
+  --blue:#1240E8; --blue-deep:#0A1F8C;
+  --pink:#FF2E8B; --lime:#C8E000; --red:#E60012; --bad:#FF5C7A;
+  /* 杂项 */
+  --track:#16297A; --dead:#2A1740; --dead-line:#4A2260;
+  --scrim:rgba(3,7,26,.86); --ghostbg:#16297A; --ghostink:#5A6BA8;
+  --shadow:0 24px 70px rgba(0,10,40,.72);
+  color-scheme:dark;
+  font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+}
+[data-theme="day"]{
+  --bg:#FFFFFF; --bg2:#F1F5FF; --panel:#F5F8FF; --field:#FFFFFF; --thumb:#EDF2FF;
+  --strongbg:#E8EFFF; --hover:#E4ECFF;
+  --line:#C9D6F5; --line-strong:#7E9BEA;
+  --ink:#071040; --ink-strong:#000000; --ink-soft:#24409E;
+  --dim:#5872B8; --faint:#98A8D8;
+  --acc:#0B3BE0; --acc-hover:#0829A8; --acc-ink:#FFFFFF;
+  --blue:#0B3BE0; --blue-deep:#08208C;
+  --pink:#D6006E; --lime:#7E8C00; --red:#C40010; --bad:#C4304A;
+  --track:#DCE4FA; --dead:#EADFF5; --dead-line:#C9B6DE;
+  --scrim:rgba(240,244,255,.88); --ghostbg:#DCE4FA; --ghostink:#8FA3D6;
+  --shadow:0 22px 60px rgba(10,25,90,.16);
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);overflow:hidden;font-size:13px;
+  transition:background-color .18s ease,color .18s ease}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+::-webkit-scrollbar-thumb:hover{background:var(--line-strong)}
+.ghost{background:none;border:1px solid var(--line);color:var(--dim);
+  padding:5px 10px;font-size:11px;cursor:pointer;letter-spacing:.05em;font-family:inherit}
+.ghost:hover{color:var(--ink);border-color:var(--line-strong)}
+.themebtn button{background:none;border:0;color:var(--dim);padding:3px 7px;cursor:pointer;
+  display:flex;align-items:center;transition:color .15s,background-color .15s}
+.themebtn button:hover{color:var(--ink)}
+.themebtn button.on{background:var(--panel);color:var(--acc)}
+.mini{background:none;border:1px solid var(--line);color:var(--dim);font:inherit;font-size:10px;
+  padding:2px 6px;cursor:pointer;letter-spacing:.06em}
+.mini:hover{color:var(--acc);border-color:var(--line-strong)}
+select,input[type=text],input[type=password]{background:var(--panel);border:1px solid var(--line);
+  color:var(--ink);font:inherit;font-size:11.5px;padding:5px 7px;outline:none;max-width:260px}
+select:focus,input:focus{border-color:var(--line-strong)}
+textarea{flex:1;background:var(--panel);border:1px solid var(--line);color:var(--ink);
+  padding:11px 12px;font:inherit;font-size:12.5px;resize:none;outline:none;min-height:42px;max-height:120px}
+textarea:focus{border-color:#4a443e}
+.send{background:var(--acc);border:0;color:#161310;font:inherit;font-size:12px;font-weight:600;
+  padding:11px 18px;cursor:pointer;letter-spacing:.06em;white-space:nowrap;font-family:inherit}
+.send:hover{background:var(--acc-hover)}
+.send:disabled{background:var(--ghostbg);color:var(--ghostink);cursor:default}
+.drawer{position:fixed;inset:0;background:var(--scrim);display:none;
+  align-items:center;justify-content:center;padding:18px;z-index:30}
+.drawer.on{display:flex}
+.dw{background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);padding:20px;
+  width:100%;max-width:620px;max-height:90vh;overflow:auto}
+.dw h3{font-size:11px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase;
+  font-weight:600;margin-bottom:14px}
+.dw h3.mt{margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.dw label{display:block;font-size:10.5px;color:var(--dim);letter-spacing:.1em;margin-bottom:12px}
+.dw input,.dw select,textarea.dwtx{width:100%;margin-top:6px;background:var(--field);
+  border:1px solid var(--line);color:var(--ink);padding:9px 10px;font:inherit;
+  font-size:12px;outline:none;max-width:none}
+textarea.dwtx{min-height:64px;resize:vertical;font-size:11.5px;line-height:1.6}
+.dw input:focus,textarea.dwtx:focus{border-color:var(--line-strong)}
+.hint{display:block;margin-top:6px;font-size:10px;opacity:.72;letter-spacing:0;line-height:1.65}
+.conn{border:1px solid var(--line);padding:9px 11px;transition:border-color .15s;display:flex;align-items:center;
+  justify-content:space-between;gap:10px;margin-bottom:7px}
+.conn .cinfo{min-width:0}
+.conn b{font-size:12px;font-weight:600;display:block}
+.conn span{font-size:10px;color:var(--dim);display:block;margin-top:2px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:330px}
+.conn em{font-size:10px;color:var(--acc);font-style:normal}
+.conn .cbtns{display:flex;gap:6px;flex:0 0 auto}
+.conn:hover{border-color:var(--line-strong)}
+.cform{border:1px solid var(--line-strong);padding:14px;margin-top:4px}
+.mbox{border:1px solid var(--line);max-height:190px;overflow:auto;margin-top:8px;padding:6px}
+.mbox .mck{display:flex;align-items:center;gap:8px;font-size:11.5px;padding:4px 6px;
+  cursor:pointer;letter-spacing:0;color:#c9c2ba;margin:0}
+.mbox .mck:hover{background:var(--hover)}
+.mbox .mck input{width:auto;margin:0;max-width:none}
+.mbox .mck span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mbox .mck em{font-style:normal;color:var(--dim);font-size:10px;letter-spacing:.04em;flex:0 0 auto}
+.row2{display:flex;gap:8px;align-items:center;margin-top:10px}
+.row2 input{margin-top:0;flex:1}
+.dwfoot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px}
+.stat{font-size:10.5px;color:var(--dim);line-height:1.6;flex:1}
+.btns{display:flex;gap:8px}
+.themebtn{display:flex;border:1px solid var(--line);padding:1px}
+.toast{position:fixed;left:50%;top:64px;transform:translateX(-50%);background:var(--panel);
+  border:1px solid var(--line-strong);padding:8px 14px;font-size:11.5px;color:var(--ink);
+  z-index:40;box-shadow:0 8px 26px rgba(0,0,0,.22)}
+
+
+/* ==========================================================================
+   P3R 风格层 —— 窄粗斜字 / 斜切色块 / 高对比描边
+   上层只换配色变量，形状语言统一放这里，方便整体调
+   ========================================================================== */
+
+@font-face{
+  font-family:'SairaCond';
+  src:url('fonts/SairaCondensed-800-normal.woff2') format('woff2');
+  font-weight:800; font-display:swap;
+}
+@font-face{
+  font-family:'SairaCond';
+  src:url('fonts/SairaCondensed-700-normal.woff2') format('woff2');
+  font-weight:700; font-display:swap;
+}
+@font-face{
+  font-family:'SairaX';
+  src:url('fonts/Saira-800-normal.woff2') format('woff2');
+  font-weight:800; font-display:swap;
+}
+
+:root{
+  --disp:'SairaCond','SairaX',system-ui,sans-serif;
+  --mono:ui-monospace,Consolas,'Cascadia Mono',monospace;
+}
+
+/* 拉丁字母、数字、标签一律用窄粗体；中文交给系统字体 */
+.brand,.tabs button,.send,.ghost,.mini,.stat,.cnt,.themebtn button,
+.cat,.danpager button,.acts button,.blkhead .n,.blkhead button,
+.dantag .ct,.acitem .ct,.danbar select,.field,.danpager .sum{
+  font-family:var(--disp);
+  letter-spacing:.06em;
+}
+.tagwrap .tg,.dantag .nm,.acitem .nm,.msg.a pre,.tagrow input{
+  font-family:var(--mono);
+}
+
+/* 顶栏：粗底线 + 一段青色标尺 */
+header{border-bottom:2px solid var(--line-strong);position:relative}
+header:after{
+  content:'';position:absolute;left:0;bottom:-2px;width:132px;height:2px;background:var(--acc);
+}
+header,footer{
+  background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:4px 4px;
+}
+[data-theme="day"] header,[data-theme="day"] footer{
+  background-image:radial-gradient(rgba(11,59,224,.07) 1px,transparent 1px);
+}
+
+.brand{font-weight:800;letter-spacing:.24em;transform:skewX(-8deg)}
+.dot{border-radius:0;transform:rotate(45deg);width:7px;height:7px}
+
+/* 按钮：斜切 + 加粗 */
+.send{transform:skewX(-8deg);font-weight:800;letter-spacing:.12em}
+.send:hover{box-shadow:3px 3px 0 rgba(0,0,0,.35)}
+.ghost{letter-spacing:.1em}
+.ghost:hover{border-color:var(--acc);color:var(--acc)}
+
+/* 输入框聚焦：青色描边 + 弱光晕 */
+input:focus,select:focus,textarea:focus{border-color:var(--acc)}
+.drawer .dw input:focus,.drawer .dw textarea:focus{border-color:var(--acc)}
+
+/* 滚动条跟着换色 */
+::-webkit-scrollbar-thumb{background:var(--line-strong)}
+::-webkit-scrollbar-thumb:hover{background:var(--acc)}
+
+/* 图标：用 Lucide 的 SVG 当遮罩，颜色吃 currentColor */
+.ico{
+  display:inline-block;width:14px;height:14px;background:currentColor;flex:0 0 auto;
+  -webkit-mask-position:center;mask-position:center;
+  -webkit-mask-size:contain;mask-size:contain;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+}
+.ico[data-i="moon"]{-webkit-mask-image:url('icons/moon.svg');mask-image:url('icons/moon.svg')}
+.ico[data-i="sun"]{-webkit-mask-image:url('icons/sun.svg');mask-image:url('icons/sun.svg')}
+.ico[data-i="settings"]{-webkit-mask-image:url('icons/sliders-horizontal.svg');mask-image:url('icons/sliders-horizontal.svg')}
+.ico[data-i="search"]{-webkit-mask-image:url('icons/search.svg');mask-image:url('icons/search.svg')}
+.ico[data-i="images"]{-webkit-mask-image:url('icons/images.svg');mask-image:url('icons/images.svg')}
+.ico[data-i="tags"]{-webkit-mask-image:url('icons/tags.svg');mask-image:url('icons/tags.svg')}
+.ico[data-i="back"]{-webkit-mask-image:url('icons/arrow-left.svg');mask-image:url('icons/arrow-left.svg')}
+.ico[data-i="prev"]{-webkit-mask-image:url('icons/chevron-left.svg');mask-image:url('icons/chevron-left.svg')}
+.ico[data-i="next"]{-webkit-mask-image:url('icons/chevron-right.svg');mask-image:url('icons/chevron-right.svg')}
+.ico[data-i="zap"]{-webkit-mask-image:url('icons/zap.svg');mask-image:url('icons/zap.svg')}
+.ico[data-i="copy"]{-webkit-mask-image:url('icons/copy.svg');mask-image:url('icons/copy.svg')}
+.ico[data-i="eraser"]{-webkit-mask-image:url('icons/eraser.svg');mask-image:url('icons/eraser.svg')}
+.ico[data-i="external"]{-webkit-mask-image:url('icons/external-link.svg');mask-image:url('icons/external-link.svg')}
+.ico[data-i="retry"]{-webkit-mask-image:url('icons/rotate-ccw.svg');mask-image:url('icons/rotate-ccw.svg')}
+.ico[data-i="folder"]{-webkit-mask-image:url('icons/folder-open.svg');mask-image:url('icons/folder-open.svg')}
+.ico[data-i="sparkles"]{-webkit-mask-image:url('icons/sparkles.svg');mask-image:url('icons/sparkles.svg')}
+
+
+/* ==========================================================================
+   背景图 —— 铺一张 P3R 的水面，压在底色之上、内容之下
+   透明度用 --bg-img 调（0 到 1），设置面板里有滑块
+   ========================================================================== */
+body::before{
+  content:'';
+  position:fixed; inset:0; z-index:-1;
+  background-image:var(--bg-url, url('bg.jpg'));   /* 启动器换了图就由 --bg-url 顶上来 */
+  background-size:cover;
+  background-position:left center;
+  background-repeat:no-repeat;
+  opacity:var(--bg-img, .16);
+  mix-blend-mode:screen;          /* 暗底上只留亮部，像墙上的水光 */
+  pointer-events:none;
+  transition:opacity .18s ease;
+}
+[data-theme="day"] body::before{
+  mix-blend-mode:multiply;        /* 白底上反过来压深，纹理才看得见 */
+  opacity:var(--bg-img, .10);
+}

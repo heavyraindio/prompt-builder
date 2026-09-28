@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anima 反推 · 反推台</title>
+<link rel="icon" href="assets/icon.png">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/reverse.css">
+<link rel="stylesheet" href="assets/dan.css">
+</head>
+<body>
+<div class="app">
+
+  <header>
+    <div class="brand">
+      <a class="back" href="index.html" title="回到门户"><i class="ico" data-i="back"></i></a>
+      <span class="dot" id="dot"></span><span id="brandName">ANIMA</span><span class="sl">/</span>REVERSE BENCH</div>
+    <div class="tabs" id="viewTabs">
+      <button data-view="reverse" class="on">反推</button>
+      <button data-view="dan">图库</button>
+    </div>
+    <div class="hmeta">
+      <div class="rounds" id="rounds" title="最近图片轮次"></div>
+      <div class="themebtn" id="themeBtn">
+        <button data-t="night" title="夜晚模式" aria-label="夜晚模式">
+          <i class="ico" data-i="moon"></i>
+        </button>
+        <button data-t="day" title="白天模式" aria-label="白天模式"><i class="ico" data-i="sun"></i></button>
+      </div>
+      <button class="ghost" id="cfgBtn">设置</button>
+    </div>
+  </header>
+
+  <div class="view" id="viewReverse">
+  <div class="toolbar">
+    <div class="field">预设包 <select id="presetSel"></select></div>
+    <div class="field">词库 <select id="libMode">
+        <option value="sfw">SFW 模式</option>
+        <option value="nsfw">NSFW 模式</option>
+        <option value="custom">自定义模式</option>
+      </select></div>
+    <div class="field"><span id="libTip"></span></div>
+    <div class="field">连接 <select id="provSel"></select></div>
+    <div class="field">模型 <select id="modelSel"></select></div>
+    <div class="field"><span id="pvnote" class="warn"></span></div>
+    <div class="field" style="margin-left:auto"><span id="modeTag">—</span></div>
+  </div>
+
+  <main>
+    <aside class="rail">
+      <div class="rhead"><span>投喂区</span>
+        <span style="display:flex;align-items:center;gap:8px">
+          <span class="cnt" id="imgCnt">0 张</span>
+          <button class="mini" id="clearImg" title="抹掉所有图片数据，只留文字记忆">清空图片</button>
+        </span>
+      </div>
+      <div class="drop" id="drop">
+        <div class="dph">拖图片进来<br><span>或点击 / Ctrl+V</span></div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <div class="rfoot">超 <b>3MB</b> 自动压缩再发；满 <b id="limNote">5</b> 轮后，最早那轮的图片从内存抹除，只留文字记忆。</div>
+    </aside>
+    <section class="chat" id="chat">
+      <div class="empty" id="chatEmpty">
+        <div class="et">只出正向提示词</div>
+        <div class="es">丢图 + 一句话（可空），拿回一整段可直接复制的 prompt。<br>
+          想改？下一轮直接说「改成黑发」「去掉场景」，其他一个字都不会动。</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="pending" id="pending"></div>
+    <textarea id="txt" rows="1" placeholder="补充要求（可空）：反推这张图 / 只留人物和服装 / 改成夜景…"></textarea>
+    <button class="send" id="send">反推 ↵</button>
+  </footer>
+  </div><!-- /viewReverse -->
+
+  <section class="dan" id="viewDan" hidden>
+    <div class="danbar">
+      <div class="acwrap">
+        <input id="danKw" placeholder="tag 组合，空格分隔 —— 例：hatsune_miku solo 1girl" autocomplete="off">
+        <div class="aclist" id="danAc" hidden></div>
+      </div>
+      <select id="danMode">
+        <option value="posts">搜图</option>
+        <option value="tags">搜 tag</option>
+      </select>
+      <button class="send" id="danGo">搜索</button>
+      <span class="stat" id="danStat"></span>
+    </div>
+    <div class="danbody">
+      <div class="dangrid" id="danGrid"></div>
+      <aside class="danside" id="danSide"></aside>
+    </div>
+    <div class="danpager" id="danPager"></div>
+  </section>
+</div>
+
+<div class="drawer" id="drawer">
+  <div class="dw">
+    <h3>模型商连接</h3>
+    <div id="connList"></div>
+    <button class="ghost" id="addConn" style="margin-top:4px">+ 添加连接</button>
+
+    <div class="cform" id="connForm" hidden>
+      <label>名称（可留空，自动取域名）<input id="fName" type="text" placeholder="我的中转"></label>
+      <label>接口地址<input id="fBase" type="text" placeholder="https://xxx.com/v1"></label>
+      <label>API Key<input id="fKey" type="password" placeholder="sk-...  （本机可留空）">
+        <span class="hint">key 只写进本机浏览器，不会存进 providers.json；转发时随请求临时带上。</span></label>
+
+      <div class="row2">
+        <button class="ghost" id="fFetch">拉取模型</button>
+        <span class="stat" id="fSelNote">已选 0 个</span>
+      </div>
+
+      <div class="row2" id="fSearchRow" hidden>
+        <input id="fSearch" type="text" placeholder="过滤模型名…">
+      </div>
+      <div class="mbox" id="fModels"></div>
+
+      <div class="row2" style="justify-content:flex-end">
+        <button class="ghost" id="fCancel">取消</button>
+        <button class="send" id="fSave">保存连接</button>
+      </div>
+    </div>
+
+    <h3 class="mt">运行设置</h3>
+    <label>连接模式
+      <select id="cMode">
+        <option value="proxy">本地代理（推荐，不受 CORS 限制；key 只存本机浏览器）</option>
+        <option value="direct">浏览器直连模型商（key 只存本机浏览器）</option>
+      </select>
+      <span class="hint">直连需要厂商允许跨域，报 failed to fetch 就是被 CORS 拦了，换回代理。</span>
+    </label>
+    <label>代理地址<input id="cProxy" type="text" placeholder="http://127.0.0.1:8899"></label>
+    <label>ComfyUI 地址<input id="cComfy" type="text" placeholder="http://127.0.0.1:8188">
+      <span class="hint">出图按钮走这里。工作流都在 comfy/ 下（API 格式）：anima 走 api_template.json，Krea2 走 api_krea2_t2i.json，Qwen2.1 走 api_qwen21_t2i.json。</span>
+    </label>
+    <label>背景图不透明度
+      <div class="row2">
+        <input id="cBg" type="range" min="0" max="60" step="1" value="16" style="flex:1">
+        <span class="stat" id="cBgVal" style="flex:0 0 auto;max-width:none">16%</span>
+      </div>
+      <span class="hint" id="bgHint">0 = 纯底色，数值越大背景越显。换图在启动器里选。</span>
+    </label>
+
+    <label>图片记忆轮次上限<input id="cLimit" type="text" value="5">
+      <span class="hint">超过这个轮数，最早的图片数据从内存抹掉。</span>
+    </label>
+    <label>追加规则（拼在每个预设包之后，可留空）
+      <textarea class="dwtx" id="cExtra" placeholder="例如：永远不写画师 tag；人物体型默认 slender"></textarea>
+    </label>
+
+    <h3 class="mt">图库（Danbooru）</h3>
+    <label>代理地址
+      <input id="cDanProxy" type="text" placeholder="http://127.0.0.1:7897">
+      <span class="hint">D 站在墙外，直连会超时。填上你本机的代理端口，图片也走它。</span>
+    </label>
+    <label>账号与 API Key（可选）
+      <div class="row2">
+        <input id="cDanLogin" type="text" placeholder="用户名">
+        <input id="cDanKey" type="password" placeholder="API Key">
+      </div>
+      <span class="hint">填了能突破匿名限制：搜索 tag 不再卡 2 个，翻页也不止 25 页。在 D 站 My Account → API Key 里拿。</span>
+    </label>
+    <span class="stat" id="danCfgNote"></span>
+
+    <div id="libSec">
+      <h3 class="mt">参考词库</h3>
+      <span class="hint">顶栏选「自定义模式」时，这里勾的章节才生效。SFW / NSFW 模式由系统按 tier 自动挂。</span>
+      <div class="row2" style="margin:9px 0 6px">
+        <button class="ghost" id="libNone">清空</button>
+        <span class="stat" id="libNote"></span>
+      </div>
+      <div class="mbox" id="libList" style="max-height:200px"></div>
+      <span class="hint">Krea2 模式不吃 danbooru 词库，这里整块收起。</span>
+    </div>
+
+    <div class="dwfoot">
+      <span class="stat" id="stat"></span>
+      <div class="btns">
+        <button class="ghost" id="wipe">清空本机数据</button>
+        <button class="ghost" id="syncTo">写回服务端</button>
+        <button class="send" id="save">保存设置</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="data/presets.js"></script>
+<script src="data/library.js"></script>
+<script src="data/presets-krea2.js"></script>
+<script src="assets/core.js"></script>
+<script src="assets/theme.js"></script>
+<script src="assets/net.js"></script>
+<script src="assets/prompt.js"></script>
+<script src="assets/images.js"></script>
+<script src="assets/clients.js"></script>
+<script src="assets/chat.js"></script>
+<script src="assets/dan.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
